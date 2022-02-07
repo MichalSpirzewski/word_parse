@@ -26,12 +26,6 @@ def main():
             except:
                 stats[letter] = 1
 
-            # print(letter)
-            # break
-        # print(word)
-        # break
-
-    # print(stats)
     sorted_stats = {k: v for k, v in sorted(stats.items(), key=lambda item: item[1], reverse=True)}
     top_letters = tuple(sorted_stats.keys())[:10]
     top_reg = ''.join(top_letters[:6])
@@ -45,9 +39,6 @@ def main():
         if m:
             matched_words.append(word)
     print(matched_words)
-    # plt.bar(stats.keys(), list(stats.values()))
-    # plt.savefig(file_name.replace('txt', 'png'))
-    # plt.close()
 
 
 if __name__ == '__main__':
