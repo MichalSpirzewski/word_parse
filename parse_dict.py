@@ -50,39 +50,85 @@ def make_guess(a_dict, letters):
                 first_words.append(word)
             # break
 
-        print(sorted(all_possible))
-        print(first_words)
+        # print(sorted(all_possible))
+        # print(first_words)
 
-    # else:
-    #     [letters.remove(x) for x in wrd.excluded]
-
-
-
-
-
-
-    # yellow = re.compile(wrd.yellow)
-    red = re.compile(wrd.red)
+    green = re.compile(wrd.green)
     matched_words = []
+    #####
+    # pętla na exclude-y:
+    #####
+    excluded_words_1 = []
+    for word in a_dict:
+        for exl in wrd.excluded:
+            if exl in word:
+                excluded_words_1.append(word)
+
+    included_list = []
+    for word in a_dict:
+        if word in excluded_words_1:
+            continue
+        else:
+            included_list.append(word)
+
+    #####
+    # Pętla na yellow letters
+    #####
+    yellow_included_list = []
+    if len(wrd.yellow) != 0:
+        for word in included_list:
+            for incl in wrd.yellow:
+                if incl in word:
+                    yellow_included_list.append(word)
+    else:
+        yellow_included_list = included_list
+    # print(len(a_dict))
+    # print(len(included_list))
+    # print(len(yellow_included_list))
+
+
+    #####
+    # Pętla na green letters
+    #####
+    last_match_words = []
+    for word in yellow_included_list:
+        match = green.match(word)
+        # print(word)
+        if match:
+            last_match_words.append(word)
+
+    print(last_match_words)
+
+
+    # print(len(excluded_words_1))
+
+    sys.exit()
 
     for word in a_dict:
         if len(letters) != 0:
-            print(word)
-            for z in wrd.excluded:
-                if z in word:
-                    break
-            else:
-                break
 
-            # break
-            print(word)
+
             for x in wrd.yellow:
-                if x not in word:
+                if x in word:
                     break
             else:
                 m = red.match(word)
                 if m:
                     matched_words.append(word)
+
+    new_match = []
+    excluded_words = []
+    for word in matched_words:
+        for exl in wrd.excluded:
+            if exl in word:
+                excluded_words.append(word)
+    for word in matched_words:
+        if word in excluded_words:
+            continue
+        print(word)
+
+    # print(matched_words)
+    # print('1', new_match)
     return matched_words
 
 def main():
@@ -103,7 +149,7 @@ def main():
     new_filtr, new_stats = filter_dict_stat(pierwszy)
     new_top = get_top_letter(new_stats)
 
-    print(new_top)
+    # print(new_top)
 
     sys.exit()
 
