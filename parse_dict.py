@@ -78,14 +78,12 @@ def make_guess(a_dict, letters):
     if len(wrd.yellow) != 0:
         for word in included_list:
             for incl in wrd.yellow:
-                if incl in word:
-                    yellow_included_list.append(word)
+                if incl not in word:
+                    break
+            else:
+                yellow_included_list.append(word)
     else:
         yellow_included_list = included_list
-    # print(len(a_dict))
-    # print(len(included_list))
-    # print(len(yellow_included_list))
-
 
     #####
     # Pętla na green letters
@@ -98,37 +96,34 @@ def make_guess(a_dict, letters):
             last_match_words.append(word)
 
     print(last_match_words)
-
-
-    # print(len(excluded_words_1))
-
+    #! TUTAJ TRZEBA POPRAWIĆ
     sys.exit()
 
-    for word in a_dict:
-        if len(letters) != 0:
+    # for word in a_dict:
+    #     if len(letters) != 0:
 
 
-            for x in wrd.yellow:
-                if x in word:
-                    break
-            else:
-                m = red.match(word)
-                if m:
-                    matched_words.append(word)
+    #         for x in wrd.yellow:
+    #             if x in word:
+    #                 break
+    #         else:
+    #             m = red.match(word)
+    #             if m:
+    #                 matched_words.append(word)
 
-    new_match = []
-    excluded_words = []
-    for word in matched_words:
-        for exl in wrd.excluded:
-            if exl in word:
-                excluded_words.append(word)
-    for word in matched_words:
-        if word in excluded_words:
-            continue
-        print(word)
+    # new_match = []
+    # excluded_words = []
+    # for word in matched_words:
+    #     for exl in wrd.excluded:
+    #         if exl in word:
+    #             excluded_words.append(word)
+    # for word in matched_words:
+    #     if word in excluded_words:
+    #         continue
+    #     print(word)
 
-    # print(matched_words)
-    # print('1', new_match)
+    # # print(matched_words)
+    # # print('1', new_match)
     return matched_words
 
 def main():
