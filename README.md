@@ -10,3 +10,7 @@ word dictionary parser for `wordle` game
 1. Use this word to solve the puzzle.
  - If no information was found at all, find a word with 2nd 5 most commonly used letters and guess.
  - If some information was found
+
+
+ # Problemy?
+ Co z powtarzającymi się literami?
