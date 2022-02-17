@@ -1,4 +1,4 @@
 # guess = 'arose'
-excluded = 'penisduchyworgąb'
+excluded = 'dupa'
 yellow = ''
 green = '.a.ka'

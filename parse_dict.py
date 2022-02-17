@@ -30,46 +30,47 @@ def get_top_letter(letters_dict, start=0, stop=30):
     return top_letters
 
 
+
+def filter_excluded(a_dictionary):
+    excluded_indices = []
+    for k, word in enumerate(a_dictionary[:]):
+        for exl in wrd.excluded:
+            if exl in word:
+                excluded_indices.append(k)
+
+    for excl_ind in list(set(excluded_indices))[::-1]:
+        a_dictionary.pop(excl_ind)
+    return a_dictionary
+
+
+def word_from_letters(some_dict, letters):
+    top_reg = ''.join(letters)
+    to_compile = '['+top_reg[:5]+']'
+    t_comp_2 = to_compile*5
+    first_guess = re.compile(t_comp_2)
+    first_words = []
+    all_possible = []
+    for word in some_dict:
+        asd = first_guess.match(word)
+        if asd:
+            all_possible.append(word)
+        for x in top_reg[:5]:
+            if x not in word:
+                break
+        else:
+            first_words.append(word)
+    return first_words
+
 def make_guess(a_dict, letters):
-
-    if len(wrd.excluded) == 0:
-        top_reg = ''.join(letters)
-        to_compile = '['+top_reg[:5]+']'
-        t_comp_2 = to_compile*5
-        first_guess = re.compile(t_comp_2)
-        first_words = []
-        all_possible = []
-        for word in a_dict:
-            asd = first_guess.match(word)
-            if asd:
-                all_possible.append(word)
-            for x in top_reg[:5]:
-                if x not in word:
-                    break
-            else:
-                first_words.append(word)
-            # break
-
-        # print(sorted(all_possible))
-        # print(first_words)
 
     green = re.compile(wrd.green)
     matched_words = []
     #####
     # pętla na exclude-y:
     #####
-    excluded_words_1 = []
-    for word in a_dict:
-        for exl in wrd.excluded:
-            if exl in word:
-                excluded_words_1.append(word)
 
-    included_list = []
-    for word in a_dict:
-        if word in excluded_words_1:
-            continue
-        else:
-            included_list.append(word)
+
+    sys.exit()
 
     #####
     # Pętla na yellow letters
@@ -135,10 +136,24 @@ def main():
 
     filtered, stats = filter_dict_stat(all_words)
     top_letters = get_top_letter(stats)
+    # print(top_letters)
+    #### Jeżeli excluded == 0, to robi słowo ze statystki calego słownika
+    if len(wrd.excluded) == 0:
+        words = word_from_letters(filtered, top_letters)
+        print(words)
+    else:
+        print(1, len(filtered))
+        after_excluded = filter_excluded(filtered)
+        _, stats = filter_dict_stat(after_excluded)
 
+        af_ex_top_letters = get_top_letter(stats)
+        af_ex_words = word_from_letters(after_excluded, af_ex_top_letters)
 
+        print(af_ex_words)
 
-    pierwszy = make_guess(filtered, top_letters)
+        print(2, len(after_excluded))
+        sys.exit()
+        pierwszy = make_guess(filtered, top_letters)
     # print(pierwszy)
 
     new_filtr, new_stats = filter_dict_stat(pierwszy)
