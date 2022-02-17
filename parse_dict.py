@@ -96,7 +96,6 @@ def main(language, *grupy):
         file_name = 'nowe_slowa.txt'
     # file_name = sys.argv[1]
     excluded, yellow, green = grupy
-    print(excluded)
     with open(file_name) as f:
         all_words = f.readlines()
 
@@ -112,8 +111,6 @@ def main(language, *grupy):
         yellow_dict = filter_yellow(excluded_dict, yellow)
 
         green_dict = filter_green(yellow_dict, yellow)
-
-        print(green_dict)
 
         _, green_stats = filter_dict_stat(green_dict)
 
