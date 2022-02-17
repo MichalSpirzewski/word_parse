@@ -120,7 +120,7 @@ def main(language, *grupy):
         green_top_letters = get_top_letter(green_stats)
         green_words = word_from_letters(green_dict, green_top_letters)
 
-        print(5, green_words)
+        print(5, green_words[:20])
 
 
 
