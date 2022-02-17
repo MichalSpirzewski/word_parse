@@ -110,7 +110,7 @@ def main(language, *grupy):
         excluded_dict = filter_excluded(filtered, excluded)
         yellow_dict = filter_yellow(excluded_dict, yellow)
 
-        green_dict = filter_green(yellow_dict, yellow)
+        green_dict = filter_green(yellow_dict, green)
 
         _, green_stats = filter_dict_stat(green_dict)
 
