@@ -1,4 +1,4 @@
 # guess = 'arose'
-excluded = 'drto'
-yellow = 'has'
-green = 'sha[^s]e'
+excluded = 'paei'
+yellow = 'o'
+green = '..n[^o]s'

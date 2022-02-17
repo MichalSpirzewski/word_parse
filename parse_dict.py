@@ -31,14 +31,14 @@ def get_top_letter(letters_dict, start=0, stop=30):
 
 
 
-def filter_excluded(a_dictionary):
+def filter_excluded(a_dictionary, excluded):
     #####
     # pętla na exclude-y:
     #####
 
     excluded_indices = []
     for k, word in enumerate(a_dictionary[:]):
-        for exl in wrd.excluded:
+        for exl in excluded:
             if exl in word:
                 excluded_indices.append(k)
 
@@ -60,15 +60,15 @@ def word_from_letters(some_dict, letters, top_count=5):
     return all_possible
 
 
-def filter_yellow(excluded_dict):
+def filter_yellow(excluded_dict, yellow):
     #####
     # Pętla na yellow letters
     #####
 
     yellow_included_list = []
-    if len(wrd.yellow) != 0:
+    if len(yellow) != 0:
         for word in excluded_dict:
-            for incl in wrd.yellow:
+            for incl in yellow:
                 if incl not in word:
                     break
             else:
@@ -78,8 +78,8 @@ def filter_yellow(excluded_dict):
     return yellow_included_list
 
 
-def filter_green(yellow_dictonary):
-    green = re.compile(wrd.green)
+def filter_green(yellow_dictonary, green):
+    green = re.compile(green)
     green_match = []
     for word in yellow_dictonary:
         if green.match(word):
@@ -89,10 +89,14 @@ def filter_green(yellow_dictonary):
 
 
 
-def main():
-
-    file_name = sys.argv[1]
-
+def main(language, *grupy):
+    if language == 'en':
+        file_name = 'new_words.txt'
+    elif language == 'pl':
+        file_name = 'nowe_slowa.txt'
+    # file_name = sys.argv[1]
+    excluded, yellow, green = grupy
+    print(excluded)
     with open(file_name) as f:
         all_words = f.readlines()
 
@@ -104,12 +108,12 @@ def main():
         words = word_from_letters(filtered, top_letters)
         print(words)
     else:
-        excluded_dict = filter_excluded(filtered)
-        yellow_dict = filter_yellow(excluded_dict)
+        excluded_dict = filter_excluded(filtered, excluded)
+        yellow_dict = filter_yellow(excluded_dict, yellow)
 
-        green_dict = filter_green(yellow_dict)
+        green_dict = filter_green(yellow_dict, yellow)
 
-        # print(green_dict)
+        print(green_dict)
 
         _, green_stats = filter_dict_stat(green_dict)
 
