@@ -1,4 +1,4 @@
 # guess = 'arose'
-excluded = 'dupa'
-yellow = ''
-green = '.a.ka'
+excluded = 'drto'
+yellow = 'has'
+green = 'sha[^s]e'
