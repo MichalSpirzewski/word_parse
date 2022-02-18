@@ -49,8 +49,8 @@ def filter_excluded(a_dictionary, excluded):
 
 def word_from_letters(some_dict, letters, top_count=5):
     top_reg = ''.join(letters)
-    to_compile = '['+top_reg[:5]+']'
-    t_comp_2 = to_compile*top_count
+    to_compile = '['+top_reg[:top_count]+']'
+    t_comp_2 = to_compile*5
     first_guess = re.compile(t_comp_2)
     all_possible = []
     for word in some_dict:
@@ -93,12 +93,12 @@ def main(language, *grupy):
     if language == 'en':
         file_name = 'new_words.txt'
     elif language == 'pl':
+        top_count = 6
         file_name = 'nowe_slowa.txt'
     # file_name = sys.argv[1]
     excluded, yellow, green = grupy
     with open(file_name) as f:
         all_words = f.readlines()
-
     filtered, stats = filter_dict_stat(all_words)
     top_letters = get_top_letter(stats)
     # print(top_letters)
@@ -109,13 +109,10 @@ def main(language, *grupy):
     else:
         excluded_dict = filter_excluded(filtered, excluded)
         yellow_dict = filter_yellow(excluded_dict, yellow)
-
         green_dict = filter_green(yellow_dict, green)
-
         _, green_stats = filter_dict_stat(green_dict)
-
         green_top_letters = get_top_letter(green_stats)
-        green_words = word_from_letters(green_dict, green_top_letters)
+        green_words = word_from_letters(green_dict, green_top_letters, top_count)
 
         print(5, green_words[:20])
 
@@ -123,4 +120,8 @@ def main(language, *grupy):
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    excluded = 'dupa'
+    yellow = ''
+    green = '.....'
+    main('pl', excluded, yellow, green)
