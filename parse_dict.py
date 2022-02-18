@@ -92,6 +92,7 @@ def filter_green(yellow_dictonary, green):
 def main(language, *grupy):
     if language == 'en':
         file_name = 'new_words.txt'
+        top_count = 5
     elif language == 'pl':
         top_count = 6
         file_name = 'nowe_slowa.txt'
